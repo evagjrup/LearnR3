@@ -23,7 +23,6 @@ r3::check_git_config()
 
 # This will be used for testing out Git
 
-r3::open_feedback_survey_intro()
 
 # GitHub setup ------------------------------------------------------------
 usethis::gh_token_help()
@@ -34,3 +33,8 @@ gitcreds::gitcreds_set()
 usethis::git_sitrep()
 
 # Test af Github
+
+
+# Feedback link -----------------------------------------------------------
+
+r3::open_feedback_survey_intro()
