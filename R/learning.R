@@ -37,3 +37,5 @@ usethis::git_sitrep()
 ## Diagnostic tool
 
 usethis::use_github()
+
+## Test
