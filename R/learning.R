@@ -23,3 +23,17 @@ r3::check_git_config()
 
 # This will be used for testing out Git
 
+
+# GitHub setup ------------------------------------------------------------
+
+usethis::gh_token_help()
+usethis::create_github_token()
+
+# !!!Personal token: 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
+
+gitcreds::gitcreds_set()
+## Fill in prompt in console
+usethis::git_sitrep()
+## Diagnostic tool
+
+usethis::use_github()
