@@ -40,3 +40,5 @@ usethis::use_github()
 # Feedback link -----------------------------------------------------------
 
 r3::open_feedback_survey_intro()
+
+Little bit conflicty
