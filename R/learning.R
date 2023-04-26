@@ -168,3 +168,45 @@ nhanes_modified <- nhanes_small %>% # Specifying dataset
     )
 
 nhanes_modified
+
+#############################################
+# Split, apply, combine method
+# Creating summary statistics
+nhanes_small %>%
+    summarise(max_bmi = max(bmi))
+## Doesn't work. Let R know to ignore missing values
+## (With remove NA-function (na.rm))
+nhanes_small %>%
+    summarise(max_bmi = max(bmi, na.rm = TRUE))
+
+nhanes_small %>%
+    summarise(max_bmi = max(bmi, na.rm = TRUE),
+              min_bmi = min(bmi, na.rm = TRUE))
+
+## Split-apply-combine
+nhanes_small %>%
+    group_by(diabetes) %>%
+    summarise(mean_age = mean(age, na.rm = TRUE),
+              mean_bmi = mean(bmi, na.rm = TRUE))
+
+## Filtering by diabetes status, so NA are not included
+nhanes_small %>%
+    filter(!is.na(diabetes)) %>%
+    group_by(diabetes) %>%
+    summarise(mean_age = mean(age, na.rm = TRUE),
+              mean_bmi = mean(bmi, na.rm = TRUE))
+
+# When we use group_by, we group our data - however,
+# it is good practice to ungroup before continuing the pipe
+nhanes_small %>%
+    filter(!is.na(diabetes)) %>%
+    group_by(diabetes) %>%
+    summarise(mean_age = mean(age, na.rm = TRUE),
+              mean_bmi = mean(bmi, na.rm = TRUE)) %>%
+    ungroup()
+
+#############################
+# Saving data
+## Using the readr function
+readr::write_csv(nhanes_small, here::here("data/nhanes_small.csv"))
+readr::write_csv(nhanes_modified, here::here("data/nhanes_modified.csv"))
