@@ -1,44 +1,89 @@
-# Basis of R --------------------------------------------------------------
-
-colnames(airquality)
-head(airquality)
-str(airquality)
-summary(airquality)
-
-## If you wrote your code in a non-stylish matter, you can either highlight
-## your code and press cmd+shift+A or simply put the curser at the end of
-## the code, press cmd+shift+P and choose "style active file"
-
-1+1
-mean(2:6)
-
-# Loading packages --------------------------------------------------------
+# Code along tidy ---------------------------------------------------------
 
 library(tidyverse)
+library(NHANES)
 
-r3::check_git_config()
+# Looking at data
+glimpse(NHANES)
 
+# Selecting columns
+select(NHANES, Age)
+NHANES %>%
+  select(Age)
 
-# Comitting ---------------------------------------------------------------
+select(NHANES, Age, Weight, BMI)
+NHANES %>%
+  select(Age, Weight, BMI)
 
-# This will be used for testing out Git
+select(NHANES, -HeadCirc)
+NHANES %>%
+  select(-HeadCirc)
 
+select(NHANES, starts_with("BP"))
+NHANES %>%
+  select(starts_with("BP"))
 
-# GitHub setup ------------------------------------------------------------
-usethis::gh_token_help()
-usethis::create_github_token()
+select(NHANES, ends_with("Day"))
+NHANES %>%
+  select(ends_with("Day"))
 
-gitcreds::gitcreds_set()
+select(NHANES, contains("Age"))
+NHANES %>%
+  select(contains("Age"))
 
-usethis::git_sitrep()
+# Create smaller NHANES datafrane
+nhanes_small <- NHANES %>%
+  select(
+    Age, Gender, BMI, Diabetes, PhysActive, BPSysAve,
+    BPDiaAve, Education
+  )
 
-usethis::use_github()
+# View the new data frame
+nhanes_small
 
-# Test af Github
+###############################################################
+# Renaming columns
+nhanes_small <- nhanes_small %>%
+  rename_with(snakecase::to_snake_case)
 
+# Renaming specific columns
+nhanes_small <- nhanes_small %>%
+  rename(sex = gender)
 
-# Feedback link -----------------------------------------------------------
+###############################################################
+# Trying out the pipe
+colnames(nhanes_small)
 
-r3::open_feedback_survey_intro()
+nhanes_small %>%
+  colnames()
 
-Little bit conflicty
+nhanes_small %>%
+  select(phys_active) %>%
+  rename(physically_active = phys_active)
+
+##################
+# Exercise 7.8
+nhanes_small %>%
+  select(bp_sys_ave, education)
+
+nhanes_small <- nhanes_small %>%
+  rename(bp_sys = bp_sys_ave,
+         bp_dia = bp_dia_ave)
+
+nhanes_small %>%
+  select(bp_sys)
+
+# Rewrite
+select(nhanes_small, bmi, contains("age"))
+
+nhanes_small %>%
+  select(bmi, contains("age"))
+
+# Rewrite to be more intuitive
+blood_pressure <- select(nhanes_small, starts_with("bp_"))
+rename(blood_pressure, bp_systolic = bp_sys)
+
+nhanes_small %>%
+  select(starts_with("bp_")) %>%
+  rename(bp_systolic = bp_sys) %>%
+  rename(bp_diastolic = bp_dia)
