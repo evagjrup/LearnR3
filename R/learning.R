@@ -32,6 +32,8 @@ gitcreds::gitcreds_set()
 
 usethis::git_sitrep()
 
+usethis::use_github()
+
 # Test af Github
 
 
