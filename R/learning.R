@@ -41,4 +41,4 @@ usethis::use_github()
 
 r3::open_feedback_survey_intro()
 
-# Here's an example of a conflict
+Little bit conflicty
