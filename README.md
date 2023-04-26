@@ -2,7 +2,7 @@ Eva
 Childhood obesity
 
 Added this sentence locally
-Added this bahbuh remotely
+Added this sentence remotely
 
 TODO: Add more to the title of your project here
 
