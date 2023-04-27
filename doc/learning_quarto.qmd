@@ -3,6 +3,32 @@ title: "Reproducible Documents"
 author: "Eva"
 format: html
 ---
+
+- My name is Eva Marie Gjørup
+- I am affiliated with the Institute of Clinical Medicin at Aarhus University
+- I do my daile work at Aarhus University Hospital
+- My research is in the field of gynecology and obstetrics
+
+# Intro
+
+**Momma**, just *killed* a man
+
+# Methods and results
+
+Put a **gun** against his head, pulled my *trigger*
+
+## Analysis
+
+Now *he's* **dead**
+```{r}
+2*2
+```
+
+
+# Discussion
+
+**Momma**, life had *just* begun, but now I've ^gone^ and thrown it all ~away~
+
 ```{r setup}
 #| message: false
 #| warning: false
@@ -55,3 +81,6 @@ nhanes_small %>%
   knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
 ```
 
+## Imposter syndrome
+
+![How I feel first day of my clinical stay](images/kid_in_scrubs.jpeg)
