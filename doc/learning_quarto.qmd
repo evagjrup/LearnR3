@@ -133,7 +133,6 @@ nhanes_small %>%
   geom_bar()
 ```
 
-
 ```{r diab-barplot}
 nhanes_small %>%
   filter(!is.na(diabetes)) %>%
@@ -199,6 +198,7 @@ nhanes_small %>%
 ```
 
 ## Plotting continuous and discrete variables
+
 ```{r}
 # Using mixed data
 nhanes_small %>%
@@ -208,6 +208,7 @@ nhanes_small %>%
 ```
 
 # Exercise 9.5
+
 ## Exercise to make plots with one or two variables
 
 ```{r task-1}
@@ -235,6 +236,7 @@ ggplot(nhanes_exercise, aes(x = diabetes_age)) +
 
 
 ### No. of people who smoke now, 20 years or older. NA excluded
+
 ```{r task-3}
 #| label: now-smoke-above-20
 #| fig-cap: "No. of current smokers 20 yrs or older"
@@ -247,10 +249,34 @@ nhanes_exercise %>%
 
 ```{r task-4}
 # BMI in relation to mean arterial pressure
-nhanes_exercise %>% 
-  mutate(mean_arterial_pressure = (bp_sys_ave) + (2 * bp_dia_ave / 3)) %>% 
+nhanes_exercise %>%
+  mutate(mean_arterial_pressure = (bp_sys_ave) + (2 * bp_dia_ave / 3)) %>%
   ggplot(aes(x = bmi, y = mean_arterial_pressure)) +
   geom_hex(na.rm = TRUE) +
   geom_smooth()
 ```
 
+### Plotting three or more variables
+
+```{r}
+# Plot systolic blood pressure in relation to education and diabetes status
+nhanes_small %>%
+  filter(!is.na(diabetes), !is.na(education)) %>%
+  ggplot(aes(x = education, y = bp_sys_ave, colour = diabetes)) +
+  geom_boxplot(na.rm = TRUE)
+```
+
+```{r}
+# Plot BMI in relation to systolic blood pressure and age
+nhanes_small %>%
+  ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+  geom_point(na.rm = TRUE)
+```
+
+```{r}
+# Plot BMI in relation to systolic blood pressure and diabetes status
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = bmi, y = bp_sys_ave, colour = diabetes)) +
+  geom_point(na.rm = TRUE)
+```
