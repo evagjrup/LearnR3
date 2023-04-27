@@ -210,3 +210,6 @@ nhanes_small %>%
 ## Using the readr function
 readr::write_csv(nhanes_small, here::here("data/nhanes_small.csv"))
 readr::write_csv(nhanes_modified, here::here("data/nhanes_modified.csv"))
+
+
+
