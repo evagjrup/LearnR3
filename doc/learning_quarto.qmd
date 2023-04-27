@@ -123,7 +123,7 @@ BMI distribution in NHANES dataset was visualized in @fig-bmi-histo.
 nhanes_small %>%
   filter(bmi <= 60) %>%
   ggplot(aes(x = bmi)) +
-  geom_histogram(na.rm = TRUE)
+  geom_histogram(na.rm = TRUE, bins = 38)
 ```
 
 ```{r barplot-education}
@@ -133,15 +133,8 @@ nhanes_small %>%
   geom_bar()
 ```
 
-```{r}
-# Create count barplot for diabetes status
-nhanes_small %>%
-  ggplot(aes(x = diabetes)) +
-  geom_bar()
-```
 
-```{r}
-# Exclude NA
+```{r diab-barplot}
 nhanes_small %>%
   filter(!is.na(diabetes)) %>%
   ggplot(aes(x = diabetes)) +
@@ -157,7 +150,7 @@ nhanes_small %>%
 
 # Making a cool double plot
 
-```{r}
+```{r two-plots-sbs-diab-edu}
 #| echo: false
 #| warning: false
 #| message: false
@@ -177,4 +170,39 @@ nhanes_small %>%
   filter(!is.na(education)) %>%
   ggplot(aes(x = education)) +
   geom_bar()
+```
+# Plotting two variables
+
+### Plotting two continuous variables
+
+```{r bmi-sysbp-common-hexplot}
+nhanes_small %>%
+  ggplot(aes(x = bmi, y = bp_sys_ave)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth(na.rm = TRUE)
+```
+
+```{r diab-edu-common-barplot}
+# Two categorical/discrete variables
+nhanes_small %>%
+  filter(!is.na(education), !is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes, fill = education)) +
+  geom_bar()
+```
+
+```{r}
+# "dodged" bar plot
+nhanes_small %>%
+  filter(!is.na(diabetes), !is.na(education)) %>%
+  ggplot(aes(x = diabetes, fill = education)) +
+  geom_bar(position = position_dodge())
+```
+
+## Plotting continuous and discrete variables
+```{r}
+# Using mixed data
+nhanes_small %>%
+  filter(!is.na(diabetes), bmi <= 60) %>%
+  ggplot(aes(x = diabetes, y = bmi)) +
+  geom_violin(na.rm = TRUE)
 ```
