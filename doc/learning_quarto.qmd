@@ -3,7 +3,7 @@ title: "Reproducible Documents"
 author: "Eva"
 format: 
     html:
-        theme: quartz
+        theme: superhero
 ---
 
 - My name is Eva Marie Gjørup
@@ -23,7 +23,7 @@ Put a **gun** against his head, pulled my *trigger*
 
 Now *he's* **dead**
 ```{r}
-2*2
+2 * 2
 ```
 
 
@@ -88,3 +88,93 @@ nhanes_small %>%
 See more in @fig-kid-scrubs!
 
 ![How I feel first day of my clinical stay](images/kid_in_scrubs.jpeg){#fig-kid-scrubs width="50%" height="50%"}
+
+## Visualizing data
+
+```{r}
+# Create histogram for BMI
+nhanes_small %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram()
+```
+
+```{r}
+# Create histogram for BMI, without NA
+nhanes_small %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
+```
+
+```{r}
+# Creating a histogram with BMI below 60
+nhanes_small %>%
+  filter(bmi <= 60) %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
+```
+
+BMI distribution in NHANES dataset was visualized in @fig-bmi-histo.
+
+```{r bmi-distribution-best}
+#| fig-cap: "Distribution of BMI."
+#| label: fig-bmi-histo
+#| warning: false
+#| echo: false
+nhanes_small %>%
+  filter(bmi <= 60) %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
+```
+
+```{r barplot-education}
+# Create count barplot for education
+nhanes_small %>%
+  ggplot(aes(x = education)) +
+  geom_bar()
+```
+
+```{r}
+# Create count barplot for diabetes status
+nhanes_small %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
+```
+
+```{r}
+# Exclude NA
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
+```
+
+```{r}
+nhanes_small %>%
+  filter(!is.na(education)) %>%
+  ggplot(aes(x = education)) +
+  geom_bar()
+```
+
+# Making a cool double plot
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: fig-diabetes-education
+#| fig-cap: "Counts of diabetes and education in NHANES"
+#| fig-subcap:
+#|   - "Number of those with or without diabetes"
+#|   - "Number of those with different educational status"
+#| layout-ncol: 2
+
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
+
+nhanes_small %>%
+  filter(!is.na(education)) %>%
+  ggplot(aes(x = education)) +
+  geom_bar()
+```
