@@ -3,7 +3,7 @@ title: "Reproducible Documents"
 author: "Eva"
 format: 
     html:
-        theme: superhero
+        theme: quartz
 ---
 
 - My name is Eva Marie Gjørup
