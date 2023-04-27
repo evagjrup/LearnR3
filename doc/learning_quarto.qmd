@@ -1,7 +1,9 @@
 ---
 title: "Reproducible Documents"
 author: "Eva"
-format: html
+format: 
+    html:
+        theme: quartz
 ---
 
 - My name is Eva Marie Gjørup
@@ -83,4 +85,6 @@ nhanes_small %>%
 
 ## Imposter syndrome
 
-![How I feel first day of my clinical stay](images/kid_in_scrubs.jpeg)
+See more in @fig-kid-scrubs!
+
+![How I feel first day of my clinical stay](images/kid_in_scrubs.jpeg){#fig-kid-scrubs width="50%" height="50%"}
