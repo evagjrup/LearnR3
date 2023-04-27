@@ -29,6 +29,7 @@ nhanes_small %>%
 
 ```{r prettier-table}
 #| echo: false
+#| warning: false
 nhanes_small %>%
   filter(!is.na(diabetes), !is.na(education)) %>%
   group_by(diabetes, education) %>%
@@ -53,4 +54,4 @@ nhanes_small %>%
   ) %>%
   knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
 ```
-```
+
